@@ -61,8 +61,10 @@ public class SecuriyConfig {
                         authorize
                                 .requestMatchers(HttpMethod.POST,"/create").permitAll()
                                 .requestMatchers("/create","/signup","/generate-token","/static/**","/uploads/**").permitAll()
-                        .requestMatchers("/dashboard").hasAuthority("Admin")
+                                .requestMatchers("/admin").permitAll()
+                                .requestMatchers("/dashboard").hasAuthority("Admin")
                         .anyRequest().authenticated())
+
                 .exceptionHandling(exception->exception.authenticationEntryPoint(unauthorizedHandler))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

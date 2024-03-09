@@ -4,6 +4,7 @@ package com.React.Backend.Controller;
 
 import com.React.Backend.Entity.User;
 import com.React.Backend.Service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -18,7 +19,13 @@ public class AdminController {
     public AdminController(UserService userService) {
         this.userService = userService;
     }
+     @PostMapping("/dashboard")
+     public ResponseEntity<?> dashboard(){
 
+
+        return  ResponseEntity.ok("amal");
+
+     }
     @GetMapping("/getAll")
     public List<User> getAllUsers(){
         List<User>user=userService.getAllUsers();

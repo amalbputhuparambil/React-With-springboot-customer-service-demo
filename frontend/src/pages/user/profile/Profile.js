@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import '../profile/profile.css';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate,useNavigate } from 'react-router-dom';
 import { baseURL } from '../../../BaseUrl/BaseUrl';
 import axios from 'axios';
 
 function Profile() {
+  const navigate=useNavigate();
+
   const [userDetails, setUserDetails] = useState({
     userName: '',
     firstName: '',
@@ -51,7 +53,7 @@ function Profile() {
       <p>{userDetails.Number}</p>
 
       <p> <Link to={'/editProfile'}><button >edit</button></Link> </p>
-      <p><button><Link to={'/'} style={{color:"white"}}>Home</Link></button></p>
+      <p><button><Link to={'/home'} style={{color:"white"}}>Home</Link></button></p>
     </div>
   );
 }

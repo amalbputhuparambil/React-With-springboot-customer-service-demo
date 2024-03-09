@@ -1,14 +1,42 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import NavLogined from "../navbar/NavLogined";
 
 
 
 function UserHome() {
+  const navigate=useNavigate();
+    const [token,setToken]=useState(null)
+    function clearAllCookies() {
+      const cookies = document.cookie.split(";");
+    
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+      }
+    }
+    
+    // Usage
  
+    
+  
+  useEffect(()=>{
+    clearAllCookies();
 
+   setToken( localStorage.getItem('token'))
+  },[])
+ 
+  if(!token){
+navigate('/login')
+
+  }
 
   return (
+  
+    <div>
+  {token ?(
     <div style={{backgroundColor:"black",color:"white",height:"70%"}}>
       <NavLogined/>
       <div className="col-md-12 mb-4">
@@ -46,6 +74,9 @@ Thank you for choosing to visit our website. We're thrilled to have you here, an
         
       </div>
     </div>
+  ):null}
+    </div>
+  
   );
 }
 

@@ -1,12 +1,11 @@
 import React from 'react'
-import '../navbar/Navbar.css'
 import { Link ,useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { baseURL } from '../../../BaseUrl/BaseUrl'
-import Cookies from 'js-cookie'
+import '../../Admin/Navbar/Navbar.css'
 
-function NavLogined() {
-const token=localStorage.getItem('token')
+function Navbar() {
+    const token=localStorage.getItem('token')
 const navigate=useNavigate();
   
     const logout = async (e) => {
@@ -29,13 +28,11 @@ const navigate=useNavigate();
   return (
     <div>
          <div class="topnav">
-  <Link class="active" to={'/home'}>Home</Link>
+  <Link class="active" to={'/dashboard'}>Home</Link>
   <Link onClick={logout}>logout</Link>
-  <Link to={'/profile'}>profile</Link>
   
 </div>
     </div>
   )
 }
-
-export default NavLogined
+export default Navbar

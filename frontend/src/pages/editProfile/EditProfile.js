@@ -3,8 +3,10 @@ import '../editProfile/EditPro.css';
 import axios from 'axios';
 import { baseURL } from '../../BaseUrl/BaseUrl';
 import NavLogined from '../user/navbar/NavLogined';
+import { useNavigate } from 'react-router-dom';
 
 function EditProfile() {
+    const navigate=useNavigate();
     const val=localStorage.getItem('token')
     const [info, setInfo] = useState({
         firstName: '',
@@ -102,6 +104,7 @@ function EditProfile() {
             })
           
            alert('successfully completed') }
+           navigate('/profile')
           
            
         }catch(error){

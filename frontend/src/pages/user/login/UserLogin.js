@@ -26,14 +26,22 @@ function UserLogin() {
           
       localStorage.setItem('token',response.data.token)
       console.log(response.data);
+     if(response.data.user.authorities[0].authority=='User'){
+         navigate('/home')
+     }else{
+      navigate('/dashboard')
+     }
+      
+      
      
-      navigate('/')
+     
   
     } catch (error) {
       console.error('an error occurred on login time:', error);
       alert("please Enter the correct User credentials")
 
     }
+   
   };
   
 
@@ -88,6 +96,6 @@ function UserLogin() {
 
     </div>
   )
-}
+};
 
 export default UserLogin;
