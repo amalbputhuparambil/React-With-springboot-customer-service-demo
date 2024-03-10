@@ -27,4 +27,12 @@ public interface UserService {
     public void updateImage(User user,String fileName);
 
 
+    void userdelete(Long id);
+
+
+    User editUser(Long id);
+
+    void updateEdit(User user);
+
+    User search(String name);
 }

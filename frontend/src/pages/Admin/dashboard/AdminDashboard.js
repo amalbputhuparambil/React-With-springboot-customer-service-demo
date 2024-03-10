@@ -1,6 +1,7 @@
 import React from 'react'
 import '../dashboard/Dashboard.css'
 import Navbar from '../Navbar/Navbar'
+import { Link } from 'react-router-dom'
 
 function AdminDashboard() {
   return (
@@ -21,11 +22,11 @@ function AdminDashboard() {
     
     </main>
     <footer>
-      <button className='button'>Users List</button>
+      <button className='button'><Link to={'/userlist'}>Users List </Link></button>
       <p>Contact</p>
-      <button>Sales </button>
+      <button className='button'>Sales </button>
       <p>About</p>
-      <button>Reports</button>
+      <button className='button'>Reports</button>
     
       
     </footer>

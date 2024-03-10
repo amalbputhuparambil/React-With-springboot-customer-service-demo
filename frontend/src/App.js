@@ -6,6 +6,9 @@ import UserRegister from "./pages/user/signup/UserRegister";
 import Profile from "./pages/user/profile/Profile";
 import EditProfile from "./pages/editProfile/EditProfile";
 import AdminDashboard from "./pages/Admin/dashboard/AdminDashboard";
+import ListUser from "./pages/Admin/userList/ListUser";
+import EditUser from "./pages/Admin/useredit/EditUser";
+import Adduser from "./pages/Admin/AddUser/Adduser";
 
 
 
@@ -22,6 +25,9 @@ function App() {
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/editProfile" element={<EditProfile/>}/>
           <Route path="/dashboard" element={<AdminDashboard />}/>
+          <Route path="/userlist" element={<ListUser />}/>
+          <Route path="/edituser" element={<EditUser />}/>
+          <Route path="/adduser" element={<Adduser />}/>
 
         </Routes>
     </Router>

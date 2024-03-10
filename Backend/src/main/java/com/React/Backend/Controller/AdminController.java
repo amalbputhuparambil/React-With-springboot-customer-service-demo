@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.sql.SQLOutput;
 import java.util.List;
 
 @RestController
@@ -28,6 +29,7 @@ public class AdminController {
      }
     @GetMapping("/getAll")
     public List<User> getAllUsers(){
+
         List<User>user=userService.getAllUsers();
         System.out.println(user.size());
         return userService.getAllUsers();
@@ -40,21 +42,35 @@ public class AdminController {
         return userService.getUser(userName);
     }
 
-    @PutMapping("/updateUser")
-    public User updateUser(@RequestBody User user, Principal principal){
+    @PutMapping("/editUser")
+    public User updateUser(@RequestBody Long id){
+        try {
+            User user=userService.editUser(id);
+            return user;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
 
-       String UserName=principal.getName();
-
-        return userService.updateUser(user,UserName);
     }
 
 
-    @DeleteMapping("/deleteUser/{userName}")
-    public void deleteUser(@PathVariable("userName")String userName){
-        userService.deleteUser(userName);
+    @PutMapping("/deleteUser")
+
+    public void deleteUser(@RequestBody Long id){
+        userService.userdelete(id);
 
 
+    }
+    @PutMapping("/updateEdit")
+    public  void  updateEdit(@RequestBody User user1){
+
+        userService.updateEdit(user1);
+    }
+    @PutMapping("/search")
+    public User search(@RequestBody String name){
+        System.out.println("oooooooooooooooooooooooooooooooooooopsa");
+        return userService.search(name);
     }
 
 }

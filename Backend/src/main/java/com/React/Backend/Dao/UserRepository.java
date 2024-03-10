@@ -4,23 +4,25 @@ package com.React.Backend.Dao;
 import com.React.Backend.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
-
-
+    @Query("select u from User u where u.username= :username")
     public User findByUsername(String username);
 
-    @Query(value = "SELECT users.user_id,users.email,users.enabled,users.first_name,users.gender,users.image,users.last_name,users.password,users.phone_number,users.username,users.deleted " +
-            "FROM users " +
-            "JOIN user_role ON users.user_id = user_role.user_user_id " +
-            "JOIN roles ON user_role.role_role_id = roles.role_id " +
-            "WHERE roles.role_name = 'USER' AND users.deleted = 'false';",nativeQuery = true)
+
+    @Query("select u from User u where u.deleted=false ")
     public List<User> findAllBy();
 
 
     User getUserById(long id);
+
+    @Query("select u from  User u where  u.id=:id")
+    User findbyid(Long id);
+    @Query("SELECT u FROM User u WHERE u.username =:name")
+    User findbyusername(String name);
 }

@@ -11,6 +11,9 @@ import com.React.Backend.Service.UserService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Set;
@@ -82,21 +85,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user,String UserName) {
-        System.out.println("successsssssssssssssss");
+
         User user1=userRepository.findByUsername(UserName);
         user1.setFirstName(user.getFirstName());
         user1.setLastName(user.getLastName());
         user1.setEmail(user.getEmail());
         user1.setPhoneNumber(user.getPhoneNumber());
+        user1.setImage(user.getImage());
         userRepository.save(user1);
         return user1;
     }
 
     @Override
     public void deleteUser(String userName) {
+
+
         User user=userRepository.findByUsername(userName);
-        user.setDeleted(true);
-        userRepository.save(user);
+        System.out.println("get all request on controller class ................................."+user);
+
+//        user.setDeleted(true);
+//        userRepository.save(user);
     }
 
     @Override
@@ -105,6 +113,38 @@ public class UserServiceImpl implements UserService {
         user1.setImage(fileName);
         userRepository.save(user1);
 
+    }
+
+    @Override
+    public void userdelete(Long id) {
+      User user=  userRepository.findbyid(id);
+         user.setDeleted(true);
+         userRepository.save(user);
+    }
+
+    @Override
+    public User editUser(Long id) {
+        User user=userRepository.findbyid(id);
+
+        return user;
+    }
+
+    @Override
+    public void updateEdit(User user1) {
+         User user= userRepository.findbyid(user1.getId());
+         user1.setPassword(user.getPassword());
+         user1.setUsername(user.getUsername());
+         user1.setDeleted(false);
+         user1.setEnabled(true);
+
+        userRepository.save(user1);
+    }
+
+    @Override
+    public User search(String name) {
+        User user=userRepository.findbyusername(name);
+        System.out.println("the result for search iss :"+user);
+        return user;
     }
 
 
