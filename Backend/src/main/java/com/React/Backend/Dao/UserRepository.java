@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
@@ -23,6 +24,11 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query("select u from  User u where  u.id=:id")
     User findbyid(Long id);
-    @Query("SELECT u FROM User u WHERE u.username =:name")
-    User findbyusername(String name);
+
+    @Query("SELECT c FROM User c WHERE c.firstName LIKE :search ")
+    Optional<User> findbyusername( String search);
+    List<User> findByUsernameStartingWith(String name);
+    List<User> findByFirstNameStartingWithAndDeletedIsFalse(String name);
+
 }
+

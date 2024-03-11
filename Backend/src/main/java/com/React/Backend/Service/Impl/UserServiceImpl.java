@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -141,10 +142,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User search(String name) {
-        User user=userRepository.findbyusername(name);
-        System.out.println("the result for search iss :"+user);
-        return user;
+    public List<User> search(String name) {
+        List<User> user1=  userRepository.findByFirstNameStartingWithAndDeletedIsFalse(name);
+
+
+
+
+        return user1;
     }
 
 

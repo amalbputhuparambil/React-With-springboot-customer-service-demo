@@ -34,5 +34,5 @@ public interface UserService {
 
     void updateEdit(User user);
 
-    User search(String name);
+    List<User> search(String name);
 }

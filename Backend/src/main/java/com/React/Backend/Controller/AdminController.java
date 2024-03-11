@@ -68,9 +68,11 @@ public class AdminController {
         userService.updateEdit(user1);
     }
     @PutMapping("/search")
-    public User search(@RequestBody String name){
-        System.out.println("oooooooooooooooooooooooooooooooooooopsa");
-        return userService.search(name);
+    public List<User> search(@RequestBody User user){
+        System.out.println("oooooooooooooooooooooooooooooooooooopsa"+user.getFirstName());
+     List<User> users=userService.search(user.getFirstName());
+
+        return users;
     }
 
 }
