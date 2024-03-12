@@ -33,6 +33,7 @@ function ListUser() {
 
     const deleteUser = async (id) => {
         try {
+            alert('are you sure to delete? ')
             await axios.put(baseURL + '/deleteUser', id, {
                 headers: {
                     'content-type': 'application/json',

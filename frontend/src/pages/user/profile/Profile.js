@@ -9,6 +9,8 @@ function Profile() {
   const navigate = useNavigate();
   const [file, setFile] = useState({ image: null });
   const[photo,setphoto]=useState({image:''})
+  const[image,setImage]=useState('');
+
   
 
   const handleChange = async (e) => {
@@ -19,14 +21,15 @@ function Profile() {
     
       setFile({ image: URL.createObjectURL(selectedFile) });
       setphoto({image:selectedFile})
+     console.log('hiiiiiiiiiiiiiiiiiii',selectedFile);
      
       const formData = new FormData();
       formData.append('image', selectedFile);
      
-       console.log('photo result :',photo);
-      await axios.put(baseURL +'/addimg', photo, {
+       console.log('photo result :',formData.get('image'));
+      await axios.post(baseURL +'/addimg', formData, {
         headers: {
-          'content-type': 'multipart/photo',
+          'content-type': 'multipart/file',
           Authorization: `Bearer ${token}`
         }
       });
@@ -65,13 +68,44 @@ function Profile() {
         console.log('error:', error);
       }
     };
+    const fetcchimage = async () => {
+      try {
+        const response = await axios.get(baseURL + '/getImage', {
+          headers: {
+            'content-type':'multipart/file',
+            Authorization: `Bearer ${token}`
+          }
+        });
+    
+        if (response.data) {
+          const blob = new Blob([response.data], { type: 'image/jpg' });
+          const imageUrl = URL.createObjectURL(blob);
+          setImage(imageUrl);
+          console.log("Image URL:", imageUrl);
+        } else {
+          console.log("No image data found in the response.");
+        }
+      } catch (error) {
+        if (error.response && error.response.data) {
+          console.log('Error:', error.response.data);
+        } else {
+          console.log('Error:', error.message);
+        }
+      }
+    };
+    
+
+    
+    fetcchimage();
 
     fetchProfile();
+
   }, []);
   console.log ( userDetails.Number);
   return (
     <div className="card">
       <div className="App">
+      <img  style={{ width: '100%',height:'50px' }} src={image}/>
         {file.image ? <img style={{ width: '100%' }} src={file.image} alt="Profile" /> : <img src="profilePic.png" alt="Default Profile" />}
         <form>
           <div style={{ display: 'flex', alignItems: 'center' }}>

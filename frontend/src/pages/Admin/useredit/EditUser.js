@@ -152,7 +152,7 @@ function EditUser() {
                     <div className="form-group">
                         <label htmlFor="email">Email:</label>
                         <input
-                           
+                            
                             onChange={(e) => setInfo(prevInfo => ({ ...prevInfo, email: e.target.value }))}
                             type="email"
                             id="email"

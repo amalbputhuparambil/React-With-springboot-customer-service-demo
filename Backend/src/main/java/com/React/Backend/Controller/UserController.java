@@ -129,12 +129,12 @@ public class UserController {
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(Files.probeContentType(filePath)))
                 .headers(httpHeaders).body(resource);
     }
-    @PutMapping("/addimg")
-    public ResponseEntity<?> addImage(@RequestBody MultipartFile multipartFile){
-        System.out.println("the call get on addimg controller" + multipartFile);
-
-        return  ResponseEntity.ok("amal");
-    }
+//    @PutMapping("/addimg")
+//    public ResponseEntity<?> addImage(@RequestBody MultipartFile image){
+//        System.out.println("the call get on addimg controller" + image);
+//
+//        return  ResponseEntity.ok("amal");
+//    }
 
     @PutMapping("/updateUser")
     public User updateUser(@RequestBody User user,Principal principal){

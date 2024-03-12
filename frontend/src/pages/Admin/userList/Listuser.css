@@ -34,7 +34,9 @@
   button {
     padding: 5px 10px;
     border: none;
-    background-color: #007bff;
+    /* background-color: #007bff; */
+    background-color:navy;
+
     color: white;
     cursor: pointer;
   }
